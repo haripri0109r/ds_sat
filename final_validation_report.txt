@@ -1,0 +1,45 @@
+CH20 – Final validation report
+
+Files inspected and modified:
+- README.md: present
+- requirements.txt: present
+- .gitignore: present
+- data_audit_report.txt: present
+- air_insights.ipynb: present
+- air_quality_analysis.xlsx: present
+- business_insights.pptx: present
+- outputs/eda_findings.txt: present
+- scripts/data_audit.py: present
+- scripts/preprocess.py: present
+- scripts/analyze.py: present
+- scripts/train_model.py: present
+- scripts/generate_reports.py: present
+- scripts/final_validation.py: present
+
+Verified numerical/results artifacts:
+- Notebook cells: 15; execution errors stored: none; embedded image outputs: 2.
+- Excel sheets: README, Data Summary, Compatibility Matrix, Data Quality, Station Analysis, Time Analysis, Correlation Analysis, Seasonal Analysis, Model Results, Limitations, Key Insights.
+- PowerPoint slides: 7.
+- Processed CSV files: 5.
+- Figures: 8.
+
+Analyses not assessable with supplied data:
+- AQI versus weather, wind, rainfall, temperature, and humidity: zero air-quality/weather date overlap; numeric fields absent.
+- AQI versus traffic: zero air-quality/traffic date overlap; no station key and no AQI field in traffic.
+
+Source preservation:
+- air_quality.csv: SHA-256 b82c60c1090d19c0f041b99a2621eaf89c1d20528493ea074a2735e91b63f23f
+- stations.csv: SHA-256 0028120ef88843cba68f3125f8b27094e1cf2c6311c5f6480bb9bd5b7bbd3cb1
+- weather.csv: SHA-256 f366ed07340a41c0eb57bb08e69203cc32f28c54d86241cc80ab23b00e7b2a11
+- traffic.csv: SHA-256 57c79c34f71dd58652ee8d73d1a317e737f6169a638ab4b61cb90d8cabee8816
+- calendar.csv: SHA-256 701c9cca495742fc4293f5e0baf2dd311de4df813a0beb560c43b05153c867ce
+
+Commands used:
+- .\.venv\Scripts\python.exe scripts\data_audit.py
+- .\.venv\Scripts\python.exe scripts\preprocess.py
+- .\.venv\Scripts\python.exe scripts\analyze.py
+- .\.venv\Scripts\python.exe scripts\train_model.py
+- .\.venv\Scripts\python.exe scripts\generate_reports.py
+- .\.venv\Scripts\python.exe scripts\final_validation.py
+
+Remaining warnings: notebook execution may emit normal Windows ZeroMQ/TCP warnings; no notebook cell errors were stored.

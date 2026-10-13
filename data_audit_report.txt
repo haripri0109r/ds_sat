@@ -1,0 +1,78 @@
+CH20 – Air Quality Insight: Data Audit
+Generated with C:\Users\HARIPRIYAN\Downloads\Air_Quality_Insight\.venv\Scripts\python.exe
+
+Dataset source note: CSV files were supplied in the project workspace. No external source metadata was included in the files.
+
+=== air_quality ===
+Rows: 108,035
+Columns: 16
+Column names: station, timestamp, PM2.5, PM10, NO, NO2, NOx, NH3, CO, SO2, O3, Benzene, Toluene, Xylene, AQI, AQI_Bucket
+Duplicate rows: 0
+Data types: station=str; timestamp=datetime64[us]; PM2.5=float64; PM10=float64; NO=float64; NO2=float64; NOx=float64; NH3=float64; CO=float64; SO2=float64; O3=float64; Benzene=float64; Toluene=float64; Xylene=float64; AQI=float64; AQI_Bucket=str
+Missing values: PM2.5=21,625; PM10=42,706; NO=17,106; NO2=16,547; NOx=15,500; NH3=48,105; CO=12,998; SO2=25,204; O3=25,568; Benzene=31,455; Toluene=38,702; Xylene=85,137; AQI=21,010; AQI_Bucket=21,010
+timestamp range: 2015-01-01 00:00:00 to 2020-07-01 00:00:00; invalid after parsing: 0
+station unique values: 110; examples: ['AP001', 'AP005', 'AS001', 'BR005', 'BR006', 'BR007', 'BR008', 'BR009', 'BR010', 'CH001', 'DL001', 'DL002']
+Negative numeric values: none
+IQR outlier flags (investigate, not deleted): {'PM2.5': 6448, 'PM10': 3084, 'NO': 9869, 'NO2': 3786, 'NOx': 7604, 'NH3': 2241, 'CO': 6460, 'SO2': 5067, 'O3': 2985, 'Benzene': 5987, 'Toluene': 6619, 'Xylene': 2913, 'AQI': 1795}
+AQI > 500 review flags: 1883; retained because the source AQI_Bucket labels these records Severe.
+
+=== stations ===
+Rows: 230
+Columns: 5
+Column names: station, station_name, location, state, status
+Duplicate rows: 0
+Data types: station=str; station_name=str; location=str; state=str; status=str
+Missing values: status=97
+station unique values: 230; examples: ['AP001', 'AP002', 'AP003', 'AP004', 'AP005', 'AS001', 'BR001', 'BR002', 'BR003', 'BR004', 'BR005', 'BR006']
+location unique values: 127; examples: ['Agra', 'Ahmedabad', 'Aizawl', 'Ajmer', 'Alwar', 'Amaravati', 'Ambala', 'Amritsar', 'Ankleshwar', 'Asansol', 'Aurangabad', 'Bagalkot']
+
+=== weather ===
+Rows: 7,732
+Columns: 3
+Column names: timestamp, location, weather_condition
+Duplicate rows: 0
+Data types: timestamp=datetime64[us]; location=str; weather_condition=str
+Missing values: none
+timestamp range: 2022-01-01 00:00:00 to 2024-08-09 00:00:00; invalid after parsing: 0
+location unique values: 8; examples: ['Electronic City', 'Hebbal', 'Indiranagar', 'Jayanagar', 'Koramangala', 'M.G. Road', 'Whitefield', 'Yeshwanthpur']
+
+=== traffic ===
+Rows: 8,936
+Columns: 16
+Column names: Date, Area Name, Road/Intersection Name, Traffic Volume, Average Speed, Travel Time Index, Congestion Level, Road Capacity Utilization, Incident Reports, Environmental Impact, Public Transport Usage, Traffic Signal Compliance, Parking Usage, Pedestrian and Cyclist Count, Weather Conditions, Roadwork and Construction Activity
+Duplicate rows: 0
+Data types: Date=datetime64[us]; Area Name=str; Road/Intersection Name=str; Traffic Volume=int64; Average Speed=float64; Travel Time Index=float64; Congestion Level=float64; Road Capacity Utilization=float64; Incident Reports=int64; Environmental Impact=float64; Public Transport Usage=float64; Traffic Signal Compliance=float64; Parking Usage=float64; Pedestrian and Cyclist Count=int64; Weather Conditions=str; Roadwork and Construction Activity=str
+Missing values: none
+Date range: 2022-01-01 00:00:00 to 2024-08-09 00:00:00; invalid after parsing: 0
+Area Name unique values: 8; examples: ['Electronic City', 'Hebbal', 'Indiranagar', 'Jayanagar', 'Koramangala', 'M.G. Road', 'Whitefield', 'Yeshwanthpur']
+Negative numeric values: none
+IQR outlier flags (investigate, not deleted): {'Traffic Volume': 24, 'Average Speed': 33, 'Congestion Level': 3, 'Road Capacity Utilization': 2078, 'Incident Reports': 100, 'Environmental Impact': 24, 'Pedestrian and Cyclist Count': 1316}
+
+=== calendar ===
+Rows: 2,961
+Columns: 6
+Column names: timestamp, weekday, month, year, season, holiday
+Duplicate rows: 0
+Data types: timestamp=datetime64[us]; weekday=str; month=int64; year=int64; season=str; holiday=str
+Missing values: none
+timestamp range: 2015-01-01 00:00:00 to 2024-08-09 00:00:00; invalid after parsing: 0
+season unique values: 4; examples: ['Monsoon', 'Post-Monsoon', 'Summer', 'Winter']
+Negative numeric values: none
+IQR outlier flags (investigate, not deleted): none
+
+=== Compatibility checks ===
+Air-quality dates: 2015-01-01 to 2020-07-01
+Weather dates: 2022-01-01 to 2024-08-09
+Traffic dates: 2022-01-01 to 2024-08-09
+Air-quality/weather date overlap: 0 dates
+Air-quality/traffic date overlap: 0 dates
+Weather and traffic use 2022–2024 location/date records; air quality uses 2015–2020 station/timestamp records. No cross-dataset pollution join was made.
+Weather has only categorical weather_condition; wind, rainfall, temperature, and humidity measurements are unavailable.
+Traffic has no AQI or station identifier; traffic volume versus AQI was not calculated.
+
+=== Compatibility matrix ===
+air_quality + stations: JOINABLE by normalized station ID; 110 of 110 air-quality IDs are present in stations (0 unmatched air-quality IDs). This is metadata enrichment only.
+air_quality + calendar: JOINABLE by calendar date; calendar supplies date labels. 2009 of 2009 air-quality dates are present in calendar; timestamp granularity differs, so the join key is date, not timestamp.
+air_quality + weather: NOT ASSESSABLE; 0 overlapping calendar dates and no station/location mapping.
+air_quality + traffic: NOT ASSESSABLE; 0 overlapping calendar dates, no station key, and no AQI field.
+weather + traffic: JOINABLE by date and shared area names for their own 2022–2024 descriptive comparison; this does not create an AQI relationship.
